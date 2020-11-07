@@ -1,2 +1,1 @@
-ï»¿
-Import-Module posh-git
+ÿþ
