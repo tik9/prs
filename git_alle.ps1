@@ -2,11 +2,11 @@ $commit='Newest commit'
 
 function gi_do ($dir_home) {
     Set-Location $dir_home
-    Write-Output "update Git: " $dir_home.Name
+    Write-Output "update Git: " $dir_home
     git status
     # git pull
     # git add .
-    git commit -am $commit
+    # git commit -am $commit
     # git push
     Set-Location ..
 }
