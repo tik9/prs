@@ -24,7 +24,7 @@ $prof_home = '~/documents/WindowsPowerShell'
 $wsl = '\\wsl$\debian'
 $home_wsl = "$wsl/home/tk"
 
-$zsh_cu = "$home_wsl/oh-my-zsh/custom"
+$zsh_cu = "$home_wsl/.oh-my-zsh/custom"
 
 $ca = "$zsh_cu/plugins/common-aliases/common-aliases.plugin.zsh"
 
@@ -32,11 +32,10 @@ $ca = "$zsh_cu/plugins/common-aliases/common-aliases.plugin.zsh"
 function ... { Set-Location ..\.. }
 function .. { Set-Location .. }
 function cv { set-location z:/home/tk/cv }
-function ho { set-location $prof_home }
 function hw { set-location $home_wsl/ }
 function myd { set-location $myd }
-function o { set-location $home_wsl/$zsh_cu }
-function us { set-location ~ }
+function o { set-location $zsh_cu }
+function ph { set-location $prof_home }
 
 # code
 function co { code $args }
@@ -102,8 +101,6 @@ function n { c:/notepad++/notepad++ $args }
 function pa { [System.Environment]::GetEnvironmentVariable("Path", "Machine") }
 
 function pand_cv {	pandoc.exe -s "$cv\.md" -o "$cv\output\cv_.html" ; Start-Process chrome.exe "$cv\output\cv_.html" }
-
-Function ph { set-location $prof_home }
 
 function pm { shutdown.exe /h }
 
