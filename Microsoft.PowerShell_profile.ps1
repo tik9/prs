@@ -6,7 +6,7 @@ $isAdmin = $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administ
 
 # Write-Output "$isAdmin ist admin"
 
-$FormatEnumerationLimit=-1
+# $FormatEnumerationLimit = -1
 
 if (($host.Name -match "ConsoleHost") -and ($isAdmin)) {
 	$host.UI.RawUI.BackgroundColor = "Darkblue"
@@ -15,27 +15,39 @@ if (($host.Name -match "ConsoleHost") -and ($isAdmin)) {
 	# Clear-Host
 }
 
-# cds
-function ... { Set-Location ..\.. }
-function .. { Set-Location .. }
 
-$cust_plu="$wsl/$home_wsl/.oh-my-zsh/custom/plugins"
-
-$home_wsl = '/home/tk'
 
 $myd = [Environment]::GetFolderPath("MyDocuments")
 
 $prof_home = '~/documents/WindowsPowerShell'
 
-$sprache = 'de'
-$wsl= '\\wsl$\debian'
+$wsl = '\\wsl$\debian'
+$home_wsl = "$wsl/home/tk"
+
+$zsh_cu = "$home_wsl/oh-my-zsh/custom"
+
+$ca = "$zsh_cu/plugins/common-aliases/common-aliases.plugin.zsh"
 
 # set-location
-function cv {set-location z:$home_wsl/cv }
-function ho {set-location $prof_home }
-function hw {set-location $wsl/$home_wsl/}
-function o {set-location $wsl/$home_wsl/.oh-my-zsh/custom }
-function us {set-location ~ }
+function ... { Set-Location ..\.. }
+function .. { Set-Location .. }
+function cv { set-location z:/home/tk/cv }
+function ho { set-location $prof_home }
+function hw { set-location $home_wsl/ }
+function myd { set-location $myd }
+function o { set-location $home_wsl/$zsh_cu }
+function us { set-location ~ }
+
+# code
+function co { code $args }
+function coc { code $ca }
+function cop { code "$prof_home/Microsoft.PowerShell_profile.ps1" }
+
+# choco
+function ch { choco -? | more }
+function coi { choco list --local-only }
+function coo { choco outdated ; choco upgrade all }
+
 
 function af { Get-ChildItem function: | Format-List | more }
 
@@ -46,7 +58,7 @@ function al { get-alias | format-list | more }
 
 function al2 { get-alias | format-list }
 
-function bg() {Start-Process -NoNewWindow @args}
+function bg() { Start-Process -NoNewWindow @args }
 
 function bv {
 	[enum]::GetNames( [System.Environment+SpecialFolder] ) | 
@@ -56,13 +68,11 @@ function bv {
 
 function c { get-content $args }
 
-function coi {choco list --local-only}
-
 function com { wmic computersystem get model, name, manufacturer, systemtype }
 
 function d { (Get-Command $args).Definition }
-function dela{Del alias:$args}
-function driv {	Get-PSDrive -PSProvider FileSystem | Select-Object name, @{n = "Root"; e = { if ($null -eq $_.DisplayRoot ) { $_.Root } else { $_.DisplayRoot } } }}
+function dela { Remove-Item alias:$args }
+function driv {	Get-PSDrive -PSProvider FileSystem | Select-Object name, @{n = "Root"; e = { if ($null -eq $_.DisplayRoot ) { $_.Root } else { $_.DisplayRoot } } } }
 
 function ds { displayswitch.exe /external } # 2 verwenden
 
@@ -79,9 +89,9 @@ function fin {	Get-ChildItem c:/ -Filter $args[0] -Recurse | Select-Object -Firs
 
 function gim {	Get-InstalledModule | Format-List | more }
 
-function map_net {net use z: $wsl}
+function map_net { net use z: $wsl }
  
-function map {New-PSDrive -Name 'z' -Root $wsl -Persist -PSProvider "FileSystem"}
+function map { New-PSDrive -Name 'z' -Root $wsl -Persist -PSProvider "FileSystem" }
 
 function mem { Get-CimInstance win32_physicalmemory | Select-Object -ExpandProperty }
 
@@ -91,7 +101,7 @@ function n { c:/notepad++/notepad++ $args }
 
 function pa { [System.Environment]::GetEnvironmentVariable("Path", "Machine") }
 
-function pand_cv {	pandoc.exe -s "$cv\.md" -o "$cv\output\cv_.html" ; Start-Process chrome.exe "$cv\output\cv_.html"}
+function pand_cv {	pandoc.exe -s "$cv\.md" -o "$cv\output\cv_.html" ; Start-Process chrome.exe "$cv\output\cv_.html" }
 
 Function ph { set-location $prof_home }
 
@@ -111,14 +121,14 @@ function run_adm { Start-Process "powershell" -Verb RunAs }
 
 function ser { Get-Service | Where-Object { $_.status -eq 'running' } | findstr $args }
 
-function spr{Get-Process $args|Stop-Process}
+function spr { Get-Process $args | Stop-Process }
 
 function x { exit }
 
 set-alias g git
 set-alias gr findstr
 set-alias l gci
-set-alias p pwd
+set-alias pw pwd
 
 . $prof_home\git_alias.ps1
 
