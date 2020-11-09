@@ -12,10 +12,9 @@ if (($host.Name -match "ConsoleHost") -and ($isAdmin)) {
 	$host.UI.RawUI.BackgroundColor = "Darkblue"
 	$host.PrivateData.ErrorBackgroundColor = "White"
 	$host.PrivateData.ErrorForegroundColor = "DarkRed"
-	# Clear-Host
 }
 
-
+$cs= 'C:\Users\User\AppData\Roaming\Code\User\'
 
 $myd = [Environment]::GetFolderPath("MyDocuments")
 
@@ -31,8 +30,11 @@ $ca = "$zsh_cu/plugins/common-aliases/common-aliases.plugin.zsh"
 # set-location
 function ... { Set-Location ..\.. }
 function .. { Set-Location .. }
+function cs { set-location $cs }
 function cv { set-location z:/home/tk/cv }
+function ho { set-location $home }
 function hw { set-location $home_wsl/ }
+function ml { set-location $home_wsl/ml }
 function myd { set-location $myd }
 function o { set-location $zsh_cu }
 function ph { set-location $prof_home }
@@ -46,7 +48,6 @@ function cop { code "$prof_home/Microsoft.PowerShell_profile.ps1" }
 function ch { choco -? | more }
 function coi { choco list --local-only }
 function coo { choco outdated ; choco upgrade all }
-
 
 function af { Get-ChildItem function: | Format-List | more }
 
@@ -67,6 +68,7 @@ function bv {
 
 function c { get-content $args }
 
+function cd { Set-Location cd ~}
 function com { wmic computersystem get model, name, manufacturer, systemtype }
 
 function d { (Get-Command $args).Definition }
@@ -122,6 +124,7 @@ function spr { Get-Process $args | Stop-Process }
 
 function x { exit }
 
+set-alias ec echo
 set-alias g git
 set-alias gr findstr
 set-alias l gci
