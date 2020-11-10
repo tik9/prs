@@ -14,35 +14,26 @@ if (($host.Name -match "ConsoleHost") -and ($isAdmin)) {
 	$host.PrivateData.ErrorForegroundColor = "DarkRed"
 }
 
-$cs= 'C:\Users\User\AppData\Roaming\Code\User\'
+$up = $env:userprofile
 
+$ca = "$zsh_cu/plugins/common-aliases/common-aliases.plugin.zsh"
+$cs = "$up\AppData\Roaming\Code\User\"
+$lw = '\\Laptopweiss\c'
 $myd = [Environment]::GetFolderPath("MyDocuments")
 
-$prof_home = '~/documents/WindowsPowerShell'
+$prof_home = "$up/documents/WindowsPowerShell"
 
 $wsl = '\\wsl$\debian'
 $home_wsl = "$wsl/home/tk"
 
 $zsh_cu = "$home_wsl/.oh-my-zsh/custom"
 
-$ca = "$zsh_cu/plugins/common-aliases/common-aliases.plugin.zsh"
+function cv { cd z:/home/tk/cv }
 
 # set-location
-function ... { Set-Location ..\.. }
-function .. { Set-Location .. }
-function cs { set-location $cs }
-function cv { set-location z:/home/tk/cv }
-function ho { set-location $home }
-function hw { set-location $home_wsl/ }
-function ml { set-location $home_wsl/ml }
-function myd { set-location $myd }
-function o { set-location $zsh_cu }
-function ph { set-location $prof_home }
-
+. $prof_home/gemeinsam.ps1
 # code
 function co { code $args }
-function coc { code $ca }
-function cop { code "$prof_home/Microsoft.PowerShell_profile.ps1" }
 
 # choco
 function ch { choco -? | more }
@@ -52,23 +43,14 @@ function coo { choco outdated ; choco upgrade all }
 function af { Get-ChildItem function: | Format-List | more }
 
 function af2 { Get-ChildItem function: | Format-List }
-
-
 function al { get-alias | format-list | more }
 
 function al2 { get-alias | format-list }
 
 function bg() { Start-Process -NoNewWindow @args }
 
-function bv {
-	[enum]::GetNames( [System.Environment+SpecialFolder] ) | 
-	Select-object @{ n = "Name"; e = { $_ } },
-	@{ n = "Pfad"; e = { [environment]::getfolderpath( $_ ) } }
-}
-
 function c { get-content $args }
 
-function cd { Set-Location cd ~}
 function com { wmic computersystem get model, name, manufacturer, systemtype }
 
 function d { (Get-Command $args).Definition }
@@ -76,13 +58,10 @@ function dela { Remove-Item alias:$args }
 function driv {	Get-PSDrive -PSProvider FileSystem | Select-Object name, @{n = "Root"; e = { if ($null -eq $_.DisplayRoot ) { $_.Root } else { $_.DisplayRoot } } } }
 
 function ds { displayswitch.exe /external } # 2 verwenden
-
 function e { . $profile }
-
 function get_reg {
 	$reg = "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters/"
 	$reg = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" # .ReleaseId
-
 	Get-ItemProperty -Path $reg
 }
 
@@ -92,7 +71,7 @@ function gim {	Get-InstalledModule | Format-List | more }
 
 function map_net { net use z: $wsl }
  
-function map { New-PSDrive -Name 'z' -Root $wsl -Persist -PSProvider "FileSystem" }
+function map { New-PSDrive -Name 'y' -Root $lw -Persist -PSProvider "FileSystem" }
 
 function mem { Get-CimInstance win32_physicalmemory | Select-Object -ExpandProperty }
 
@@ -119,7 +98,11 @@ function res {
 function run_adm { Start-Process "powershell" -Verb RunAs }
 
 function ser { Get-Service | Where-Object { $_.status -eq 'running' } | findstr $args }
-
+function sf {
+	[enum]::GetNames( [System.Environment+SpecialFolder] ) | 
+	Select-object @{ n = "Name"; e = { $_ } },
+	@{ n = "Pfad"; e = { [environment]::getfolderpath( $_ ) } } | sort-object name
+}
 function spr { Get-Process $args | Stop-Process }
 
 function x { exit }

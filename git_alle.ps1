@@ -2,7 +2,7 @@ $commit = 'Newest commit'
 
 function gi_do ($verz) {
     Set-Location $verz.FullName
-    Write-Output "[**** update Git: " $verz.fullname
+    Write-Output "\n[**** update Git: " $verz.fullname
     # git status
     # git pull
     # git add .
@@ -19,7 +19,7 @@ foreach ($verz in $gd_find) {
     # Write-Output dire $(Get-ChildItem $verz)
     if ('.git' -in (Get-ChildItem -Path $verz).name) {
         # Write-Output verz $verz
-        gi_do $verz
+        # gi_do $verz
     }
 }
 
