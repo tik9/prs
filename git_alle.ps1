@@ -5,9 +5,9 @@ function gi_do ($verz) {
     Write-Output "\n[**** update Git: " $verz.fullname
     # git status
     # git pull
-    # git add .
+    git add .
     git commit -am $commit
-    # git push
+    git push
 }
 
 $gd_find = Get-ChildItem $home_wsl -exclude '.*' -directory
@@ -23,10 +23,14 @@ foreach ($verz in $gd_find) {
     }
 }
 
-$ar = $cs, $prof_home, $zsh_cu
+$ar = 
+# $cs, 
+$prof_home, $zsh_cu
+,$doks
+
 foreach ($elem in $ar) {
     $verz = Get-Item $elem
-    # Write-Output $verz.fullname
+    # Write-Output $verz
     gi_do $verz
 }
 

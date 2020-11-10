@@ -26,12 +26,13 @@ $prof_home = "$up/documents/WindowsPowerShell"
 $wsl = '\\wsl$\debian'
 $home_wsl = "$wsl/home/tk"
 
+$doks = "$home_wsl/doks"
 $zsh_cu = "$home_wsl/.oh-my-zsh/custom"
 
 function cv { cd z:/home/tk/cv }
 
 # set-location
-. $prof_home/gemeinsam.ps1
+. $prof_home/bothenv.ps1
 # code
 function co { code $args }
 
