@@ -17,6 +17,7 @@ if (($host.Name -match "ConsoleHost") -and ($isAdmin)) {
 $up = $env:userprofile
 
 $ca = "$zsh_cu/plugins/common-aliases/common-aliases.plugin.zsh"
+$cf = 'common_functions'
 $cs = "$up\AppData\Roaming\Code\User\"
 $lw = '\\Laptopweiss\c'
 $myd = [Environment]::GetFolderPath("MyDocuments")
@@ -31,8 +32,6 @@ $zsh_cu = "$home_wsl/.oh-my-zsh/custom"
 
 function cv { cd z:/home/tk/cv }
 
-# set-location
-. $prof_home/bothenv.ps1
 # code
 function co { code $args }
 
@@ -54,6 +53,7 @@ function c { get-content $args }
 
 function com { wmic computersystem get model, name, manufacturer, systemtype }
 
+function cp_be { Copy-Item $zsh_cu/$cf.zsh $prof_home\$cf.ps1 }
 function d { (Get-Command $args).Definition }
 function dela { Remove-Item alias:$args }
 function driv {	Get-PSDrive -PSProvider FileSystem | Select-Object name, @{n = "Root"; e = { if ($null -eq $_.DisplayRoot ) { $_.Root } else { $_.DisplayRoot } } } }
@@ -114,6 +114,7 @@ set-alias gr findstr
 set-alias l gci
 set-alias pw pwd
 
-. $prof_home\git_alias.ps1
+. $prof_home\git.ps1
+. $prof_home/$cf.ps1
 
 Import-Module 'C:\tools\poshgit\dahlbyk-posh-git-9bda399\src\posh-git.psd1'
