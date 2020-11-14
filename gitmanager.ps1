@@ -7,13 +7,11 @@ function gi_do ($verz) {
     # git pull
     # git add .
     git commit -am $commit
-    git push
+    # git push
 }
 
 $gd_find = Get-ChildItem $home_wsl -exclude '.*' -directory
 # $gd_find
-# exit
-# Write-Output $home_wsl
 
 foreach ($verz in $gd_find) {
     # Write-Output dire $(Get-ChildItem $verz)
@@ -26,8 +24,8 @@ foreach ($verz in $gd_find) {
 $ar = 
 # $cs, 
 $prof_home
+# ,$doks
 ,$zsh_cu
-,$doks
 
 foreach ($elem in $ar) {
     $verz = Get-Item $elem
