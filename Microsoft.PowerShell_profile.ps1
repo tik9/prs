@@ -1,5 +1,7 @@
 # https://gist.github.com/timsneath/19867b12eee7fd5af2ba
 
+function te { Set-Location ~}
+
 $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
 $principal = New-Object Security.Principal.WindowsPrincipal $identity
 $isAdmin = $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
@@ -31,13 +33,14 @@ $wsl = '\\wsl$\debian'
 
 $zsh_cu = "$home_wsl/.oh-my-zsh/custom"
 
-function cv { cd z:/home/tk/cv }
+function cv { Set-Location z:/home/tk/cv }
 
 # code
 function co { code $args }
 
 # choco
 function ch { choco -? | more }
+function chi { choco install $args }
 function coi { choco list --local-only }
 function coo { choco outdated ; choco upgrade all }
 
@@ -49,9 +52,8 @@ function com { wmic computersystem get model, name, manufacturer, systemtype }
 
 function cu {
 	$url = 'http://192.168.178.36/cgit/doks.git/tree/arbeiten_haus.md'
-	# $url = $args
-	# Invoke-WebRequest  $url -UseBasicParsing
-	Invoke-WebRequest  -UseBasicParsing $args
+	$url = $args
+	Invoke-WebRequest  -UseBasicParsing $url
 }
 
 function d { (Get-Command $args).Definition }

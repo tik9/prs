@@ -22,4 +22,7 @@ function cop { code $prof_home/Microsoft.PowerShell_profile.ps1 }
 function cpcf { Cp $zsh_cu/$cf.zsh $prof_home\$cf.ps1 }
 function cpg { Cp $plu/git/git.plugin.zsh $prof_home\git.ps1 }
 
+
+function l { ls}
 function ll { ls |more }
+function pw { pwd}

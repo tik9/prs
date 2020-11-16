@@ -5,7 +5,7 @@ function gi_do ($verz) {
     Write-Output "\n[**** update Git: " $verz.fullname
     # git status
     # git pull
-    # git add .
+    git add .
     git commit -am $commit
     # git push
 }
@@ -23,9 +23,9 @@ foreach ($verz in $gd_find) {
 
 $ar = 
 # $cs, 
-$prof_home
 # ,$doks
-,$zsh_cu
+$prof_home,
+$zsh_cu
 
 foreach ($elem in $ar) {
     $verz = Get-Item $elem
