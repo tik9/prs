@@ -1,6 +1,8 @@
-$moti ='motivation.pdf'
-$cv='cv_en.pdf'
-$zeugnisse ='zeugnisse_ohne.pdf'
-$output='bewerbung.pdf'
+$pfad = 'C:\Users\User\Documents\download'
+$out = "$pfad/gericht_olg.pdf"
 
-Merge-PDF $pwd/$moti, $pwd/cv/output\$cv, $pwd/$zeugnisse -outputfile $PWD/$output
+$arguments = $(Get-ChildItem $pfad | ForEach-Object { $_.Name }) -join ","
+
+Write-Output $arguments
+
+Invoke-Expression ("merge-pdf {0} -outputfile {1}" -f ($arguments, $out))

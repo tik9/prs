@@ -24,7 +24,7 @@ foreach ($verz in $gd_find) {
 $ar = 
 # $cs, 
 # ,$doks
-$prof_home,
+$PSScriptRoot,
 $zsh_cu
 
 foreach ($elem in $ar) {
@@ -33,4 +33,4 @@ foreach ($elem in $ar) {
     gi_do $verz
 }
 
-Set-Location $home_wsl
+# Set-Location $PSScriptRoot
