@@ -23,6 +23,3 @@ function ConvertAllToMp3([string] $sourcePath, [switch] $isRemoveOldFile = $fals
  
 # ConvertAllToMp3 .
 # vlc -I dummy .\fonsi.mp4 ":sout=#transcode{acodec=mp3,vcodec=dummy}:standard{access=file,mux=raw,dst=fonsi.mp3}"  vlc://quit | out-null
-
-function test {echo 1}
-test

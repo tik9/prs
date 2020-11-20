@@ -26,8 +26,9 @@ function gs { git status }
 function gsh { git show }
 
 function gsq {
-    git reset --hard HEAD~5
+    git rebase -i HEAD~5
 
-    git merge --squash HEAD@ { 1 }
-    git commit
+    # git reset --hard HEAD~5
+    # git merge --squash HEAD@ { 1 }
+    # git commit
 }

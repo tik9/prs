@@ -27,10 +27,11 @@ $gim = "$PSScriptRoot/gitmanager.ps1"
 # $doks = "$home_wsl/doks"
 # $lw = '\\Laptopweiss\c'
 # $myd = [Environment]::GetFolderPath("MyDocuments")
+$mym = [Environment]::GetFolderPath("Mymusic")
 
-# $plu = "$zsh_cu/plugins"
+$plu = "$zsh_cu/plugins"
 $up = $env:userprofile
-# $prof_home = "$up/documents/WindowsPowerShell"
+$prof_home = $PSScriptRoot
 
 function cv { Set-Location z:/home/tk/cv }
 
@@ -43,6 +44,7 @@ function ch { choco -? | more }
 function chi { choco install $args }
 function coi { choco list --local-only }
 function coo { choco outdated ; choco upgrade all }
+function cr { choco uninstall $args }
 
 function bg() { Start-Process -NoNewWindow @args }
 
