@@ -3,10 +3,10 @@ $commit = 'Newest commit'
 function gi_do ($verz) {
     Set-Location $verz.FullName
     Write-Host -ForegroundColor White "\n[**** update Git: " $verz.fullname
-    git status
+    # git status
     # git pull
     # git add .
-    # git commit -am $commit
+    git commit -am $commit
     # git push
 }
 

@@ -20,13 +20,16 @@ $zsh_cu = "$home_wsl/.oh-my-zsh/custom"
 
 $ca = "$zsh_cu/plugins/common-aliases/common-aliases.plugin.zsh"
 $cf = "$PSScriptRoot/common_functions.ps1"
+# $bs = "$up\AppData\Roaming\Brackets\"
 # $cs = "$up\AppData\Roaming\Code\User\"
+
 $dat = $MyInvocation.MyCommand.Definition
 $gim = "$PSScriptRoot/gitmanager.ps1"
 
 # $doks = "$home_wsl/doks"
 # $lw = '\\Laptopweiss\c'
 # $myd = [Environment]::GetFolderPath("MyDocuments")
+$ml = "$home_wsl/ml"
 $mym = [Environment]::GetFolderPath("Mymusic")
 
 $plu = "$zsh_cu/plugins"
