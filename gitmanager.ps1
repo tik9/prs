@@ -5,7 +5,7 @@ function gi_do ($verz) {
     Write-Host -ForegroundColor White "\n[**** update Git: " $verz.fullname
     # git status
     # git pull
-    # git add .
+    git add .
     git commit -am $commit
     # git push
 }

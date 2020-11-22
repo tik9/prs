@@ -21,7 +21,9 @@ $zsh_cu = "$home_wsl/.oh-my-zsh/custom"
 $ca = "$zsh_cu/plugins/common-aliases/common-aliases.plugin.zsh"
 $cf = "$PSScriptRoot/common_functions.ps1"
 # $bs = "$up\AppData\Roaming\Brackets\"
-# $cs = "$up\AppData\Roaming\Code\User\"
+$cs = "$up\AppData\Roaming\Code\User\"
+
+$cv="$home_wsl/cv"
 
 $dat = $MyInvocation.MyCommand.Definition
 $gim = "$PSScriptRoot/gitmanager.ps1"
@@ -31,12 +33,11 @@ $gim = "$PSScriptRoot/gitmanager.ps1"
 # $myd = [Environment]::GetFolderPath("MyDocuments")
 $ml = "$home_wsl/ml"
 $mym = [Environment]::GetFolderPath("Mymusic")
+$pl = "$home_wsl/pl"
 
 $plu = "$zsh_cu/plugins"
 $up = $env:userprofile
 $prof_home = $PSScriptRoot
-
-function cv { Set-Location z:/home/tk/cv }
 
 # code
 function co { code $args }
@@ -67,6 +68,8 @@ function dela { Remove-Item alias:$args }
 function driv {	Get-PSDrive -PSProvider FileSystem | Select-Object name, @{n = "Root"; e = { if ($null -eq $_.DisplayRoot ) { $_.Root } else { $_.DisplayRoot } } } }
 
 function ds { displayswitch.exe /external } # 2 verwenden
+
+function dh {$disk = Get-WmiObject Win32_LogicalDisk -Filter "DeviceID='C:'" | Foreach-Object {$_.Size,$_.FreeSpace} $disk.size/1gb }
 function e { . $profile }
 function ec { Write-Output $args }
 
