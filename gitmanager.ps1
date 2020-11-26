@@ -2,10 +2,10 @@ $commit = 'Newest commit'
 
 function gi_do ($verz) {
     Set-Location $verz.FullName
-    Write-Output "\n[**** update Git: " $verz.fullname
+    Write-Host -ForegroundColor White "\n[**** update Git: " $verz.fullname
     # git status
     # git pull
-    # git add .
+    git add .
     git commit -am $commit
     # git push
 }
@@ -23,9 +23,9 @@ foreach ($verz in $gd_find) {
 
 $ar = 
 # $cs, 
-$prof_home
 # ,$doks
-,$zsh_cu
+$PSScriptRoot,
+$zsh_cu
 
 foreach ($elem in $ar) {
     $verz = Get-Item $elem
@@ -33,4 +33,4 @@ foreach ($elem in $ar) {
     gi_do $verz
 }
 
-Set-Location $home_wsl
+# Set-Location $PSScriptRoot

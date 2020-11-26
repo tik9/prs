@@ -13,45 +13,54 @@ if (($host.Name -match "ConsoleHost") -and ($isAdmin)) {
 	$host.PrivateData.ErrorBackgroundColor = "White"
 	$host.PrivateData.ErrorForegroundColor = "DarkRed"
 }
-
-$ca = "$zsh_cu/plugins/common-aliases/common-aliases.plugin.zsh"
-$cf = 'common_functions'
-$cs = "$up\AppData\Roaming\Code\User\"
-$doks = "$home_wsl/doks"
-$home_wsl = "$wsl/home/tk"
-$lw = '\\Laptopweiss\c'
-$myd = [Environment]::GetFolderPath("MyDocuments")
-
-$plu = "$zsh_cu/plugins"
-$up = $env:userprofile
-$prof_home = "$up/documents/WindowsPowerShell"
-
-
 $wsl = '\\wsl$\debian'
+$home_wsl = "$wsl/home/tk"
 
 $zsh_cu = "$home_wsl/.oh-my-zsh/custom"
 
-function cv { cd z:/home/tk/cv }
+$ca = "$zsh_cu/plugins/common-aliases/common-aliases.plugin.zsh"
+$cf = "$PSScriptRoot/common_functions.ps1"
+# $bs = "$up\AppData\Roaming\Brackets\"
+$cs = "$up\AppData\Roaming\Code\User\"
+
+$cv="$home_wsl/cv"
+
+$dat = $MyInvocation.MyCommand.Definition
+$gim = "$PSScriptRoot/gitmanager.ps1"
+
+# $doks = "$home_wsl/doks"
+# $lw = '\\Laptopweiss\c'
+# $myd = [Environment]::GetFolderPath("MyDocuments")
+$ml = "$home_wsl/ml"
+$mym = [Environment]::GetFolderPath("Mymusic")
+$pl = "$home_wsl/pl"
+
+$plu = "$zsh_cu/plugins"
+$up = $env:userprofile
+$prof_home = $PSScriptRoot
 
 # code
 function co { code $args }
+function gim { code $gim }
 
 # choco
 function ch { choco -? | more }
+function chi { choco install $args }
 function coi { choco list --local-only }
 function coo { choco outdated ; choco upgrade all }
+function cr { choco uninstall $args }
 
 function bg() { Start-Process -NoNewWindow @args }
 
 function c { get-content $args }
 
+function chr { Start-Process chrome.exe $args }
 function com { wmic computersystem get model, name, manufacturer, systemtype }
 
 function cu {
 	$url = 'http://192.168.178.36/cgit/doks.git/tree/arbeiten_haus.md'
-	# $url = $args
-	# Invoke-WebRequest  $url -UseBasicParsing
-	Invoke-WebRequest  -UseBasicParsing $args
+	$url = $args
+	Invoke-WebRequest  -UseBasicParsing $url
 }
 
 function d { (Get-Command $args).Definition }
@@ -59,6 +68,8 @@ function dela { Remove-Item alias:$args }
 function driv {	Get-PSDrive -PSProvider FileSystem | Select-Object name, @{n = "Root"; e = { if ($null -eq $_.DisplayRoot ) { $_.Root } else { $_.DisplayRoot } } } }
 
 function ds { displayswitch.exe /external } # 2 verwenden
+
+function dh {$disk = Get-WmiObject Win32_LogicalDisk -Filter "DeviceID='C:'" | Foreach-Object {$_.Size,$_.FreeSpace} $disk.size/1gb }
 function e { . $profile }
 function ec { Write-Output $args }
 
@@ -72,8 +83,9 @@ function fin {	Get-ChildItem c:/ -Filter $args[0] -Recurse | Select-Object -Firs
 
 function finstr { Get-ChildItem -Recurse | Select-String -Pattern $args | Select-Object -Unique Path }
 
-function gim {	Get-InstalledModule | Format-List | more }
+function gimo {	Get-InstalledModule | Format-List | more }
 
+function lo { Get-ChildItem | Sort-Object name }
 function map_net { net use z: $wsl }
  
 function map { New-PSrive -Name 'y' -Root $lw -Persist -PSProvider "FileSystem" }
@@ -86,7 +98,7 @@ function n { c:/notepad++/notepad++ $args }
 
 function pa { [System.Environment]::GetEnvironmentVariable("Path", "Machine") }
 
-function pand_cv {	pandoc.exe -s "$cv\.md" -o "$cv\output\cv_.html" ; Start-Process chrome.exe "$cv\output\cv_.html" }
+function pand_cv {	pandoc.exe -s "$cv\.md" -o "$cv\output\cv_.html" ; chr "$cv\output\cv_.html" }
 
 function pm { shutdown.exe /h }
 
@@ -95,6 +107,12 @@ function prompt {
 	$verbindung = $(Get-NetConnectionProfile).name
 	write-host "PS $gl - $verbindung >" -NoNewline
 	return " "
+}
+
+function q {
+	$dat_te = 'http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
+	$a = Get-Date
+	Invoke-WebRequest $dat_te -UseBasicParsing | Out-Null; "$((10/((Get-Date)-$a).TotalSeconds)*8) Mbps"
 }
 function res {
 	$video = Get-WmiObject -Class CIM_VideoControllerResolution
@@ -110,13 +128,13 @@ function sf {
 }
 function spr { Get-Process $args | Stop-Process }
 
-function us{ec $env:USERNAME}
+function us { ec $env:USERNAME }
 function x { exit }
 
 
 set-alias gr findstr
 
-. $prof_home\git.ps1
-. $prof_home/$cf.ps1
+. $PSScriptRoot\git.ps1
+. $cf
 
 Import-Module 'C:\tools\poshgit\dahlbyk-posh-git-9bda399\src\posh-git.psd1'
