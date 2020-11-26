@@ -36,6 +36,7 @@ $mym = [Environment]::GetFolderPath("Mymusic")
 $pl = "$home_wsl/pl"
 
 $plu = "$zsh_cu/plugins"
+$pr="$home_wsl/psrandom"
 $up = $env:userprofile
 $prof_home = $PSScriptRoot
 
