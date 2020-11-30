@@ -26,10 +26,9 @@ function ... { cd ..\.. }
 function .. { cd .. }
 function cs { cd $cs }
 function cv { cd $cv }
-function dok { cd $HOME/doks }
+function dok { cd $hw/doks }
 function ho { cd $up }
-function hw { cd $HOME }
-function lt { cd $HOME/lt }
+function hw { cd $hw }
 function ml { cd $ml }
 function myd { cd $myd }
 function mu { cd $mu }

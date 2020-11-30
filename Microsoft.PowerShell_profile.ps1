@@ -14,29 +14,30 @@ if (($host.Name -match "ConsoleHost") -and ($isAdmin)) {
 	$host.PrivateData.ErrorForegroundColor = "DarkRed"
 }
 $wsl = '\\wsl$\debian'
-$home_wsl = "$wsl/home/tk"
+$hw = "$wsl/home/tk"
 
-$zsh_cu = "$home_wsl/.oh-my-zsh/custom"
+$zsh_cu = "$hw/.oh-my-zsh/custom"
 
 $ca = "$zsh_cu/plugins/common-aliases/common-aliases.plugin.zsh"
 $cf = "$PSScriptRoot/common_functions.ps1"
 # $bs = "$up\AppData\Roaming\Brackets\"
 $cs = "$up\AppData\Roaming\Code\User\"
 
-$cv="$home_wsl/cv"
+$cv="$hw/cv"
 
 $dat = $MyInvocation.MyCommand.Definition
 $gim = "$PSScriptRoot/gitmanager.ps1"
 
-# $doks = "$home_wsl/doks"
+# $doks = "$hw/doks"
+
 # $lw = '\\Laptopweiss\c'
 # $myd = [Environment]::GetFolderPath("MyDocuments")
-$ml = "$home_wsl/ml"
+$ml = "$hw/ml"
 $mym = [Environment]::GetFolderPath("Mymusic")
-$pl = "$home_wsl/pl"
+$pl = "$hw/pl"
 
 $plu = "$zsh_cu/plugins"
-$pr="$home_wsl/psrandom"
+$pr="$hw/psrandom"
 $up = $env:userprofile
 $prof_home = $PSScriptRoot
 
