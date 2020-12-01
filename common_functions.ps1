@@ -34,8 +34,9 @@ function myd { cd $myd }
 function mu { cd $mu }
 function o { cd $zsh_cu }
 function oh { cd $oh }
-function ph { cd $prof_home }
+function ph { cd $ph }
 function pl { cd $pl }
 function plu { cd $plu }
 function pr { cd $pr }
 function pw { pwd}
+function tm { cd $tm }

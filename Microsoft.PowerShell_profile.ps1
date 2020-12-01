@@ -38,8 +38,9 @@ $pl = "$hw/pl"
 
 $plu = "$zsh_cu/plugins"
 $pr="$hw/psrandom"
+$ph = $PSScriptRoot
+$tm="$hw/tesseractToMarkdown"
 $up = $env:userprofile
-$prof_home = $PSScriptRoot
 
 # code
 function co { code $args }
