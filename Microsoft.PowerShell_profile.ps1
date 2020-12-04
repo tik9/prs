@@ -39,6 +39,7 @@ $pl = "$hw/pl"
 $plu = "$zsh_cu/plugins"
 $pr="$hw/psrandom"
 $ph = $PSScriptRoot
+$st="$hw\further-skill-tests"
 $tm="$hw/tesseractToMarkdown"
 $up = $env:userprofile
 
@@ -132,6 +133,7 @@ function sf {
 function spr { Get-Process $args | Stop-Process }
 
 function us { ec $env:USERNAME }
+function vse {  Write-Output $(code --list-extensions) |Out-File extensions.txt}
 function x { exit }
 
 

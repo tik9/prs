@@ -12,7 +12,7 @@ If you frequently use **both environments** Linux **Zsh** and Windows **Powershe
  
   **Motivation**
    
-  Find **common code** that works on both systems. Example: [common_functions.zsh](https://github.com/tik9/custom/blob/master/common_functions.zsh) and [common_functions.ps1](https://github.com/tik9/prs/blob/master/common_functions.ps1)
+  Find **common code** that works on both systems. Example: [common_functions.zsh](https://github.com/tik9/custom/blob/master/common_functions.zsh) and [common_functions.ps1](common_functions.ps1)
 
   &nbsp;
 
