@@ -10,27 +10,23 @@ function gdc { git diff --cached }
 function gg { git log }
 
 function gstart {
-# echo "# psrandom" >> README.md
-# echo "# psrandom" |out-file README.md
-
     git init
     git add README.md
     git commit -m "first commit"
-    git remote add origin https://github.com/tik9/psrandom.git
-    git push -u origin main
+    git push -u origin master
 
 }
 
-function gi {
+function giwf {
     ga
-    gc $1
+    git commit -m 'commit'
     gpu
 }
 
 function gll { git pull }
 function glg { git log --stat }
 function glum { git pull upstream master }
-function gm { git commit -m }
+function gic { git commit -am 'commit'}
 
 function gpu { git push }
 function gpus { git push --set-upstream origin master }
@@ -40,9 +36,9 @@ function gsh { git show }
 function grv { git remote -v }
 
 function gsq {
-    git rebase -i HEAD~5
+    # git rebase -i HEAD~5
 
-    # git reset --hard HEAD~5
-    # git merge --squash HEAD@ { 1 }
-    # git commit
+    git reset --hard HEAD~2
+    git merge --squash HEAD@{1}
+    git commit
 }

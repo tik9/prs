@@ -20,28 +20,29 @@ $zsh_cu = "$hw/.oh-my-zsh/custom"
 
 $ca = "$zsh_cu/plugins/common-aliases/common-aliases.plugin.zsh"
 $cf = "$PSScriptRoot/common_functions.ps1"
-# $bs = "$up\AppData\Roaming\Brackets\"
-$cs = "$up\AppData\Roaming\Code\User\"
+$cs = "$ho\AppData\Roaming\Code\User\"
 
 $cv="$hw/cv"
 
 $dat = $MyInvocation.MyCommand.Definition
-$gim = "$PSScriptRoot/gitmanager.ps1"
+$fs="$hw\further-skill-tests"
+$gt="$hw/git"
+$gim = "$gt/gitmanager.ps1"
+$ho = $env:userprofile
 
-# $doks = "$hw/doks"
-
+$doks = "$hw/doks"
+$lt="$hw/lt"
 # $lw = '\\Laptopweiss\c'
 # $myd = [Environment]::GetFolderPath("MyDocuments")
 $ml = "$hw/ml"
 $mym = [Environment]::GetFolderPath("Mymusic")
+$pi = "$ho/pictures"
 $pl = "$hw/pl"
 
 $plu = "$zsh_cu/plugins"
 $pr="$hw/psrandom"
 $ph = $PSScriptRoot
-$st="$hw\further-skill-tests"
 $tm="$hw/tesseractToMarkdown"
-$up = $env:userprofile
 
 # code
 function co { code $args }
@@ -96,7 +97,7 @@ function map { New-PSrive -Name 'y' -Root $lw -Persist -PSProvider "FileSystem" 
 
 function mem { Get-CimInstance win32_physicalmemory | Select-Object -ExpandProperty }
 
-function mo { more $args }
+function le { more $args }
 
 function n { c:/notepad++/notepad++ $args }
 
