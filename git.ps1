@@ -9,6 +9,24 @@ function gdc { git diff --cached }
 
 function gg { git log }
 
+function gic { git commit -am 'commit'}
+
+function giwf {
+    ga
+    git commit -m 'commit from function giwf'
+    gpu
+}
+
+function gll { git pull }
+function glg { git log --stat }
+function glum { git pull upstream master }
+
+function gpu { git push }
+function gpus { git push --set-upstream origin master }
+function grs { git restore . }
+function gs { git status }
+function gsh { git show }
+
 function gstart {
     git init
     git add README.md
@@ -17,22 +35,6 @@ function gstart {
 
 }
 
-function giwf {
-    ga
-    git commit -m 'commit'
-    gpu
-}
-
-function gll { git pull }
-function glg { git log --stat }
-function glum { git pull upstream master }
-function gic { git commit -am 'commit'}
-
-function gpu { git push }
-function gpus { git push --set-upstream origin master }
-function grs { git restore . }
-function gs { git status }
-function gsh { git show }
 function grv { git remote -v }
 
 function gsq {

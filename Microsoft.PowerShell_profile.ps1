@@ -1,30 +1,17 @@
 # https://gist.github.com/timsneath/19867b12eee7fd5af2ba
 
-$identity = [Security.Principal.WindowsIdentity]::GetCurrent()
-$principal = New-Object Security.Principal.WindowsPrincipal $identity
-$isAdmin = $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
-# Write-Output "$isAdmin ist admin"
-
-# $FormatEnumerationLimit = -1
-
-if (($host.Name -match "ConsoleHost") -and ($isAdmin)) {
-	$host.UI.RawUI.BackgroundColor = "Darkblue"
-	$host.PrivateData.ErrorBackgroundColor = "White"
-	$host.PrivateData.ErrorForegroundColor = "DarkRed"
-}
 $wsl = '\\wsl$\debian'
 $hw = "$wsl/home/tk"
 
-$zsh_cu = "$hw/.oh-my-zsh/custom"
+$o = "$hw/.oh-my-zsh/custom"
 
-$ca = "$zsh_cu/plugins/common-aliases/common-aliases.plugin.zsh"
+$ca = "$o/plugins/common-aliases/common-aliases.plugin.zsh"
 $cf = "$PSScriptRoot/common_functions.ps1"
 $cs = "$ho\AppData\Roaming\Code\User\"
 
 $cv="$hw/cv"
 
-$dat = $MyInvocation.MyCommand.Definition
 $fs="$hw\further-skill-tests"
 $gt="$hw/git"
 $gim = "$gt/gitmanager.ps1"
@@ -39,7 +26,7 @@ $mym = [Environment]::GetFolderPath("Mymusic")
 $pi = "$ho/pictures"
 $pl = "$hw/pl"
 
-$plu = "$zsh_cu/plugins"
+$plu = "$o/plugins"
 $pr="$hw/psrandom"
 $ph = $PSScriptRoot
 $tm="$hw/tesseractToMarkdown"
@@ -54,6 +41,8 @@ function chi { choco install $args }
 function coi { choco list --local-only }
 function coo { choco outdated ; choco upgrade all }
 function cr { choco uninstall $args }
+
+function a { displayswitch.exe /external } # 2 verwenden
 
 function bg() { Start-Process -NoNewWindow @args }
 
@@ -72,7 +61,6 @@ function d { (Get-Command $args).Definition }
 function dela { Remove-Item alias:$args }
 function driv {	Get-PSDrive -PSProvider FileSystem | Select-Object name, @{n = "Root"; e = { if ($null -eq $_.DisplayRoot ) { $_.Root } else { $_.DisplayRoot } } } }
 
-function ds { displayswitch.exe /external } # 2 verwenden
 
 function dh {$disk = Get-WmiObject Win32_LogicalDisk -Filter "DeviceID='C:'" | Foreach-Object {$_.Size,$_.FreeSpace} $disk.size/1gb }
 function e { . $profile }
