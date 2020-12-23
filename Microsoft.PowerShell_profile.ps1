@@ -20,9 +20,9 @@ $ho = $env:userprofile
 $doks = "$hw/doks"
 $lt="$hw/lt"
 # $lw = '\\Laptopweiss\c'
-# $myd = [Environment]::GetFolderPath("MyDocuments")
+$myd = [Environment]::GetFolderPath('MyDocuments')
 $ml = "$hw/ml"
-$mym = [Environment]::GetFolderPath("Mymusic")
+$mu = [Environment]::GetFolderPath('Mymusic')
 $pi = "$ho/pictures"
 $pl = "$hw/pl"
 

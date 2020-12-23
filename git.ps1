@@ -38,9 +38,9 @@ function gstart {
 function grv { git remote -v }
 
 function gsq {
-    # git rebase -i HEAD~5
+    git rebase -i HEAD~2
 
-    git reset --hard HEAD~2
-    git merge --squash HEAD@{1}
-    git commit
+    # git reset --hard HEAD~2
+    # git merge --squash HEAD@{1}
+    # git commit
 }
