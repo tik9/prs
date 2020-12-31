@@ -131,4 +131,4 @@ set-alias gr findstr
 . $PSScriptRoot\git.ps1
 . $cf
 
-Import-Module 'C:\tools\poshgit\dahlbyk-posh-git-9bda399\src\posh-git.psd1'
+# Import-Module 'C:\tools\poshgit\dahlbyk-posh-git-9bda399\src\posh-git.psd1'
