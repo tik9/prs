@@ -9,27 +9,26 @@ $o = "$hw/.oh-my-zsh/custom"
 $ca = "$o/plugins/common-aliases/common-aliases.plugin.zsh"
 $cf = "$PSScriptRoot/common_functions.ps1"
 $cs = "$ho\AppData\Roaming\Code\User\"
+$cs2 = '/home/tk/.config/code/User'
 
-$cv="$hw/cv"
+$cv = "$hw/cv"
 
-$fs="$hw\further-skill-tests"
-$gt="$hw/git"
-$gim = "$gt/gitmanager.ps1"
+$fs = "$hw\further-skill-tests"
+$gt = "$hw/git"
 $ho = $env:userprofile
 
 $doks = "$hw/doks"
-$lt="$hw/lt"
-# $lw = '\\Laptopweiss\c'
+$lt = "$hw/lt"
 $myd = [Environment]::GetFolderPath('MyDocuments')
 $ml = "$hw/ml"
 $mu = [Environment]::GetFolderPath('Mymusic')
 $pi = "$ho/pictures"
-$pl = "$hw/pl"
+$pl = "$hw/pluralsight-skill-tests"
 
 $plu = "$o/plugins"
-$pr="$hw/psrandom"
+$pr = "$hw/psrandom"
 $ph = $PSScriptRoot
-$tm="$hw/tesseractToMarkdown"
+$tm = "$hw/tesseractToMarkdown"
 
 # code
 function co { code $args }
@@ -62,43 +61,30 @@ function dela { Remove-Item alias:$args }
 function driv {	Get-PSDrive -PSProvider FileSystem | Select-Object name, @{n = "Root"; e = { if ($null -eq $_.DisplayRoot ) { $_.Root } else { $_.DisplayRoot } } } }
 
 
-function dh {$disk = Get-WmiObject Win32_LogicalDisk -Filter "DeviceID='C:'" | Foreach-Object {$_.Size,$_.FreeSpace} $disk.size/1gb }
 function e { . $profile }
 function ec { Write-Output $args }
-
-function get_reg {
-	$reg = "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters/"
-	$reg = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" # .ReleaseId
-	Get-ItemProperty -Path $reg
-}
 
 function fin {	Get-ChildItem c:/ -Filter $args[0] -Recurse | Select-Object -First 1 }
 
 function finstr { Get-ChildItem -Recurse | Select-String -Pattern $args | Select-Object -Unique Path }
 
-function gimo {	Get-InstalledModule | Format-List | more }
-
-function lo { Get-ChildItem | Sort-Object name }
+function hif { Get-History | Format-List }
 function map_net { net use z: $wsl }
  
 function map { New-PSrive -Name 'y' -Root $lw -Persist -PSProvider "FileSystem" }
 
-function mem { Get-CimInstance win32_physicalmemory | Select-Object -ExpandProperty }
 
 function le { more $args }
 
-function n { c:/notepad++/notepad++ $args }
 
 function pa { [System.Environment]::GetEnvironmentVariable("Path", "Machine") }
-
-function pand_cv {	pandoc.exe -s "$cv\.md" -o "$cv\output\cv_.html" ; chr "$cv\output\cv_.html" }
 
 function pm { shutdown.exe /h }
 
 function prompt {
 	$gl = Get-Location
 	$verbindung = $(Get-NetConnectionProfile).name
-	write-host "PS $gl - $verbindung >" -NoNewline
+	write-host "PS [$Env:username] $gl - $verbindung >" -NoNewline
 	return " "
 }
 
@@ -114,15 +100,10 @@ function res {
 function run_adm { Start-Process "powershell" -Verb RunAs }
 
 function ser { Get-Service | Where-Object { $_.status -eq 'running' } | findstr $args }
-function sf {
-	[enum]::GetNames( [System.Environment+SpecialFolder] ) | 
-	Select-object @{ n = "Name"; e = { $_ } },
-	@{ n = "Pfad"; e = { [environment]::getfolderpath( $_ ) } } | sort-object name
-}
+
 function spr { Get-Process $args | Stop-Process }
 
-function us { ec $env:USERNAME }
-function vse {  Write-Output $(code --list-extensions) |Out-File extensions.txt}
+function vse { Write-Output $(code --list-extensions) | Out-File extensions.txt }
 function x { exit }
 
 
@@ -131,4 +112,4 @@ set-alias gr findstr
 . $PSScriptRoot\git.ps1
 . $cf
 
-# Import-Module 'C:\tools\poshgit\dahlbyk-posh-git-9bda399\src\posh-git.psd1'
+Import-Module "$hw/posh-git\src\posh-git.psd1"
