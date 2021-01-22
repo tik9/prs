@@ -88,6 +88,21 @@ function prompt {
 	return " "
 }
 
+function pwcf {
+    #hibern
+
+    $pwcfg=2
+
+    #nothing
+
+    #$pwcfg=0
+
+    powercfg -SETACVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e 4f971e89-eebd-4455-a8de-9e59040e7347 5ca83367-6e45-459f-a27b-476b1d01c936 $pwcfg
+
+    powercfg -setactive 381b4222-f694-41f0-9685-ff5bb260df2e
+}
+
+
 function q {
 	$dat_te = 'http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
 	$a = Get-Date
