@@ -103,6 +103,18 @@ function ser { Get-Service | Where-Object { $_.status -eq 'running' } | findstr 
 
 function spr { Get-Process $args | Stop-Process }
 
+function update {
+	Get-HotFix |Where-Object{$_.InstalledOn -gt ((Get-Date).AddDays(-30))}
+	(New-Object -com "Microsoft.Update.AutoUpdate"). Results | Format-List
+}
+function upd {
+	$Session = New-Object -ComObject Microsoft.Update.Session 
+$Searcher = $Session.CreateUpdateSearcher()
+$HistoryCount = $Searcher.GetTotalHistoryCount()
+# http://msdn.microsoft.com/en-us/library/windows/desktop/aa386532%28v=vs.85%29.aspx
+$Searcher.QueryHistory(0,$HistoryCount) | ForEach-Object {$_}
+}
+
 function vse { Write-Output $(code --list-extensions) | Out-File extensions.txt }
 function x { exit }
 
