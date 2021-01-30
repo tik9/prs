@@ -27,6 +27,14 @@ function grs { git restore . }
 function gs { git status }
 function gsh { git show }
 
+function gstart {
+    git init
+    git add README.md
+    git commit -m "first commit"
+    git push -u origin master
+
+}
+
 function gru { git remote update }
 
 function grv { git remote -v }

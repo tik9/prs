@@ -73,7 +73,6 @@ function map_net { net use z: $wsl }
  
 function map { New-PSrive -Name 'y' -Root $lw -Persist -PSProvider "FileSystem" }
 
-
 function le { more $args }
 
 
@@ -89,19 +88,12 @@ function prompt {
 }
 
 function pwcf {
-    #hibern
+	#hibern=2
+	#nothing=0
 
-    $pwcfg=2
-
-    #nothing
-
-    #$pwcfg=0
-
-    powercfg -SETACVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e 4f971e89-eebd-4455-a8de-9e59040e7347 5ca83367-6e45-459f-a27b-476b1d01c936 $pwcfg
-
-    powercfg -setactive 381b4222-f694-41f0-9685-ff5bb260df2e
+	powercfg -SETACVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e 4f971e89-eebd-4455-a8de-9e59040e7347 5ca83367-6e45-459f-a27b-476b1d01c936 $args
+	powercfg -setactive 381b4222-f694-41f0-9685-ff5bb260df2e
 }
-
 
 function q {
 	$dat_te = 'http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
@@ -119,15 +111,15 @@ function ser { Get-Service | Where-Object { $_.status -eq 'running' } | findstr 
 function spr { Get-Process $args | Stop-Process }
 
 function update {
-	Get-HotFix |Where-Object{$_.InstalledOn -gt ((Get-Date).AddDays(-30))}
+	Get-HotFix | Where-Object { $_.InstalledOn -gt ((Get-Date).AddDays(-30)) }
 	(New-Object -com "Microsoft.Update.AutoUpdate"). Results | Format-List
 }
 function upd {
 	$Session = New-Object -ComObject Microsoft.Update.Session 
-$Searcher = $Session.CreateUpdateSearcher()
-$HistoryCount = $Searcher.GetTotalHistoryCount()
-# http://msdn.microsoft.com/en-us/library/windows/desktop/aa386532%28v=vs.85%29.aspx
-$Searcher.QueryHistory(0,$HistoryCount) | ForEach-Object {$_}
+	$Searcher = $Session.CreateUpdateSearcher()
+	$HistoryCount = $Searcher.GetTotalHistoryCount()
+	# http://msdn.microsoft.com/en-us/library/windows/desktop/aa386532%28v=vs.85%29.aspx
+	$Searcher.QueryHistory(0, $HistoryCount) | ForEach-Object { $_ }
 }
 
 function vse { Write-Output $(code --list-extensions) | Out-File extensions.txt }
