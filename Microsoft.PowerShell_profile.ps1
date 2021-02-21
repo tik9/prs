@@ -9,15 +9,14 @@ $o = "$hw/.oh-my-zsh/custom"
 $ca = "$o/plugins/common-aliases/common-aliases.plugin.zsh"
 $cf = "$PSScriptRoot/common_functions.ps1"
 $cs = "$ho\AppData\Roaming\Code\User\"
-$cs2 = '/home/tk/.config/code/User'
 
 $cv = "$hw/cv"
 
 $fs = "$hw\further-skill-tests"
+$gh="$hw/tik9.github.io"
 $gt = "$hw/git"
 $ho = $env:userprofile
 
-$doks = "$hw/doks"
 $lt = "$hw/lt"
 $myd = [Environment]::GetFolderPath('MyDocuments')
 $ml = "$hw/ml"
@@ -131,4 +130,4 @@ set-alias gr findstr
 . $PSScriptRoot\git.ps1
 . $cf
 
-Import-Module "$hw/posh-git\src\posh-git.psd1"
+Import-Module $PSScriptRoot/posh-git\src\posh-git.psd1
