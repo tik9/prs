@@ -1,4 +1,3 @@
-function ga { git add --all }
 function gb { git branch }
 
 function gc { git commit -a -m $1 }
@@ -12,8 +11,8 @@ function gg { git log }
 function gic { git commit -am 'commit'}
 
 function gw {
-    ga
-    git commit -m 'commit from tik9'
+    git add .
+    git commit -m 'commit from tik'
     gpu
 }
 
@@ -40,7 +39,7 @@ function gru { git remote update }
 function grv { git remote -v }
 
 function gsq {
-    git rebase -i HEAD~3
+    git rebase -i HEAD~5
 
     # git reset --hard HEAD~2
     # git merge --squash HEAD@{1}
