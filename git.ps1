@@ -11,9 +11,9 @@ function gg { git log }
 
 function gic { git commit -am 'commit'}
 
-function giwf {
+function gw {
     ga
-    git commit -m 'commit from function giwf'
+    git commit -m 'commit from tik9'
     gpu
 }
 
@@ -35,12 +35,16 @@ function gstart {
 
 }
 
+function gru { git remote update }
+
 function grv { git remote -v }
 
 function gsq {
-    git rebase -i HEAD~2
+    git rebase -i HEAD~3
 
     # git reset --hard HEAD~2
     # git merge --squash HEAD@{1}
     # git commit
 }
+
+function glt { git ls-tree -r master --name-only }
