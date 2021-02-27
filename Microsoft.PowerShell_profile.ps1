@@ -2,37 +2,26 @@
 
 
 $wsl = '\\wsl$\debian'
-$hw = "$wsl/home/tk"
+$hw='/home/tk'
+#$hw = "$wsl/$hw"
 
 $o = "$hw/.oh-my-zsh/custom"
 
 $ca = "$o/plugins/common-aliases/common-aliases.plugin.zsh"
 $cf = "$PSScriptRoot/common_functions.ps1"
+
 $cs = "$ho\AppData\Roaming\Code\User\"
 $cs2 = '/home/tk/.config/code/User'
 
-$cv = "$hw/cv"
+$cv = "$hw/tik9.github.io.git"
+$cy = "$hw/cpyth"
+$ga = "$hw/game"
 
-$fs = "$hw\further-skill-tests"
 $gt = "$hw/git"
 $ho = $env:userprofile
 
-$doks = "$hw/doks"
-$lt = "$hw/lt"
-$myd = [Environment]::GetFolderPath('MyDocuments')
-$ml = "$hw/ml"
-$mu = [Environment]::GetFolderPath('Mymusic')
-$pi = "$ho/pictures"
-$pl = "$hw/pluralsight-skill-tests"
-
-$plu = "$o/plugins"
-$pr = "$hw/psrandom"
 $ph = $PSScriptRoot
-$tm = "$hw/tesseractToMarkdown"
 
-# code
-function co { code $args }
-function gim { code $gim }
 
 # choco
 function ch { choco -? | more }
@@ -42,8 +31,6 @@ function coo { choco outdated ; choco upgrade all }
 function cr { choco uninstall $args }
 
 function a { displayswitch.exe /external } # 2 verwenden
-
-function bg() { Start-Process -NoNewWindow @args }
 
 function c { get-content $args }
 
@@ -83,8 +70,8 @@ function pm { shutdown.exe /h }
 
 function prompt {
 	$gl = Get-Location
-	$verbindung = $(Get-NetConnectionProfile).name
-	write-host "PS [$Env:username] $gl - $verbindung >" -NoNewline
+	#$verbindung = $(Get-NetConnectionProfile).name
+	write-host "PS [$Env:username] $gl >" -NoNewline
 	return " "
 }
 
@@ -116,15 +103,12 @@ function run_adm { Start-Process "powershell" -Verb RunAs }
 
 function ser { Get-Service | Where-Object { $_.status -eq 'running' } | findstr $args }
 
-function spr { Get-Process $args | Stop-Process }
-
 function vse { Write-Output $(code --list-extensions) | Out-File extensions.txt }
 function x { exit }
-
 
 set-alias gr findstr
 
 . $PSScriptRoot\git.ps1
 . $cf
 
-Import-Module "$hw/posh-git\src\posh-git.psd1"
+Import-Module $PSScriptRoot\posh-git\src\posh-git.psd1
