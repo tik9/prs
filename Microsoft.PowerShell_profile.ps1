@@ -3,17 +3,19 @@
 
 $wsl = '\\wsl$\debian'
 $hw='/home/tk'
-#$hw = "$wsl/$hw"
+$hw = "$wsl/$hw"
+$jekyll="$ho/downloads/PortableJekyll-master"
 
 $o = "$hw/.oh-my-zsh/custom"
 
+$be="$jekyll/bewerbung"
 $ca = "$o/plugins/common-aliases/common-aliases.plugin.zsh"
 $cf = "$PSScriptRoot/common_functions.ps1"
 
 $cs = "$ho\AppData\Roaming\Code\User\"
 
 $cv = "$hw/tik9.github.io.git"
-$cy = "$hw/cpyth"
+$cy = "$hw/cpython"
 $ga = "$hw/game"
 
 $gt = "$hw/git"
