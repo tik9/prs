@@ -1,5 +1,6 @@
 # https://gist.github.com/timsneath/19867b12eee7fd5af2ba
 
+$ho = $env:userprofile
 
 $wsl = '\\wsl$\debian'
 $hw='/home/tk'
@@ -9,20 +10,20 @@ $jekyll="$ho/downloads/PortableJekyll-master"
 $o = "$hw/.oh-my-zsh/custom"
 
 $be="$jekyll/bewerbung"
-$ca = "$o/plugins/common-aliases/common-aliases.plugin.zsh"
+$ca = "$ho/calculator"
 $cf = "$PSScriptRoot/common_functions.ps1"
 
 $cs = "$ho\AppData\Roaming\Code\User\"
 
 $cv = "$hw/tik9.github.io.git"
 $cy = "$hw/cpython"
-$ga = "$hw/game"
+$ga = "$jekyll/game"
 
 $gt = "$hw/git"
-$ho = $env:userprofile
 
 $ph = $PSScriptRoot
-
+$rt="$ho/rest-test"
+$ws="$hw/workspace1.code-workspace"
 
 # choco
 function ch { choco -? | more }
@@ -35,6 +36,7 @@ function a { displayswitch.exe /external } # 2 verwenden
 
 function c { get-content $args }
 
+function co {code $args}
 function chr { Start-Process chrome.exe $args }
 function com { wmic computersystem get model, name, manufacturer, systemtype }
 
