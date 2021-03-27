@@ -3,40 +3,42 @@
 $ho = $env:userprofile
 
 $wsl = '\\wsl$\debian'
-$hw='/home/tk'
+$hw = '/home/tk'
 $hw = "$wsl/$hw"
-$jekyll="$ho/downloads/PortableJekyll-master"
+$jekyll = "$ho/portable"
 
 $o = "$hw/.oh-my-zsh/custom"
 
-$be="$jekyll/bewerbung"
+$be = "$jekyll/bewerbung"
 $ca = "$ho/calculator"
 $cf = "$PSScriptRoot/common_functions.ps1"
 
 $cs = "$ho\AppData\Roaming\Code\User\"
 
-$cv = "$hw/tik9.github.io.git"
+$cv = "$jekyll/tik9.github.io.git"
 $cy = "$hw/cpython"
 $ga = "$jekyll/game"
 
 $gt = "$hw/git"
 
 $ph = $PSScriptRoot
-$rt="$ho/rest-test"
-$ws="$hw/workspace1.code-workspace"
+$rt = "$ho/rest-test"
+$ws = "$hw/workspace1.code-workspace"
+
+# node
+function noi{ npm i $args}
+function nr{ npm r $args}
 
 # choco
-function ch { choco -? | more }
 function chi { choco install $args }
 function coi { choco list --local-only }
 function coo { choco outdated ; choco upgrade all }
-function cr { choco uninstall $args }
 
 function a { displayswitch.exe /external } # 2 verwenden
 
 function c { get-content $args }
 
-function co {code $args}
+function co { code $args }
 function chr { Start-Process chrome.exe $args }
 function com { wmic computersystem get model, name, manufacturer, systemtype }
 
@@ -58,6 +60,10 @@ function fin {	Get-ChildItem c:/ -Filter $args[0] -Recurse | Select-Object -Firs
 
 function finstr { Get-ChildItem -Recurse | Select-String -Pattern $args | Select-Object -Unique Path }
 
+function Get-Size {
+ param([string]$pth)
+ "{0:n0}" -f ((Get-ChildItem -path $pth -recurse | measure-object -property length -sum).sum / 1mb) + " mb"
+}
 function hif { Get-History | Format-List }
 function map_net { net use z: $wsl }
  
@@ -91,7 +97,7 @@ function q {
 	Invoke-WebRequest $dat_te -UseBasicParsing | Out-Null; "$((10/((Get-Date)-$a).TotalSeconds)*8) Mbps"
 }
 function res {
-	$video = Get-WmiObject -Class CIM_VideoControllerResolution
+	$video = Get-CimInstance -Class CIM_VideoControllerResolution
 	$video[-1] | Select-Object Caption
 }
 function run_adm { Start-Process "powershell" -Verb RunAs }
