@@ -1,33 +1,38 @@
 # https://gist.github.com/timsneath/19867b12eee7fd5af2ba
 
+# Write-Output $PSScriptRoot
+$hostname=hostname
+
 $ho = $env:userprofile
 
-$wsl = '\\wsl$\debian'
-$hw = '/home/tk'
-$hw = "$wsl/$hw"
-$jekyll = "$ho/portable"
+$hw = 'home/tk'
+if ($hostname.contains('tik')) {
 
-$o = "$hw/.oh-my-zsh/custom"
+	$wsl = '\\wsl$\debian'
+	$hw = "$wsl/$hw"
+}
+# Write-Output $hw
 
-$be = "$jekyll/bewerbung"
-$ca = "$ho/calculator"
+$o = "$ho/.oh-my-zsh/custom"
+
+$be = "$ho/bewerbung"
 $cf = "$PSScriptRoot/common_functions.ps1"
 
-$cs = "$ho\AppData\Roaming\Code\User\"
+$cv = "$ho/tik9.github.io.git"
+$cy = "$ho/cpython"
+$ga = "$ho/game"
 
-$cv = "$jekyll/tik9.github.io.git"
-$cy = "$hw/cpython"
-$ga = "$jekyll/game"
+$gt = "$ho/git"
 
-$gt = "$hw/git"
-
-$ph = $PSScriptRoot
 $rt = "$ho/rest-test"
-$ws = "$hw/workspace1.code-workspace"
+$ws = "$ho/workspace.code-workspace"
 
 # node
-function noi{ npm i $args}
-function nr{ npm r $args}
+function n { npm $args }
+function no { node $args }
+function nog { npm i -g $args }
+function noi { npm i $args }
+function nr { npm run $args }
 
 # choco
 function chi { choco install $args }
@@ -74,6 +79,15 @@ function le { more $args }
 
 function pa { [System.Environment]::GetEnvironmentVariable("Path", "Machine") }
 
+function pat {
+	[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$args", "Machine")
+}
+function prid {
+	$prid = 35729
+	# $prid=$args
+	Get-Process -Id (Get-NetTCPConnection -LocalPort $prid).OwningProcess | Stop-Process
+}
+
 function pm { shutdown.exe /h }
 
 function prompt {
@@ -86,7 +100,6 @@ function prompt {
 function pwcf {
 	#hibern=2
 	#nothing=0
-
 	powercfg -SETACVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e 4f971e89-eebd-4455-a8de-9e59040e7347 5ca83367-6e45-459f-a27b-476b1d01c936 $args
 	powercfg -setactive 381b4222-f694-41f0-9685-ff5bb260df2e
 }
@@ -119,6 +132,7 @@ function upd {
 }
 
 function vse { Write-Output $(code --list-extensions) | Out-File extensions.txt }
+function w { wsl }
 function x { exit }
 
 set-alias gr findstr
