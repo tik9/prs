@@ -1,20 +1,13 @@
-function gb { git branch }
 
-function gc { git commit -a -m $1 }
-function cg { git commit -a -m $args }
 function ga { git add . }
+function gb { git branch }
+function gc { git commit -a -m $1 }
+function gcp { git commit -a -m $args }
 function gd { git diff }
 function gdc { git diff --cached }
 
 function gg { git log }
 
-function gic { git commit -am 'commit'}
-
-function gw {
-    git add .
-    git commit -m 'commit from tik'
-    gpu
-}
 
 function gll { git pull }
 function glg { git log --stat }
@@ -46,4 +39,8 @@ function gsq {
     # git commit
 }
 
-function glt { git ls-tree -r master --name-only }
+function gw {
+    git add .
+    git commit -m 'commit from tik'
+    gpu
+}

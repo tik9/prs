@@ -1,22 +1,24 @@
 # https://gist.github.com/timsneath/19867b12eee7fd5af2ba
 
-# Write-Output $PSScriptRoot
-$hostname=hostname
+Write-Output "$PSScriptRoot - $(hostname)"
 
-$ho = $env:userprofile
+$hostname = $(hostname)
 
-$hw = 'home/tk'
+$hw = '/home/tk'
+$ho = $hw
+$ph = "$ho/.config/powershell"
+
 if ($hostname.contains('tik')) {
+	# $ho = $env:userprofile
 
 	$wsl = '\\wsl$\debian'
 	$hw = "$wsl/$hw"
+	$ph = "$ho/Documents/WindowsPowerShell"
 }
-# Write-Output $hw
 
 $o = "$ho/.oh-my-zsh/custom"
 
 $be = "$ho/bewerbung"
-$cf = "$PSScriptRoot/common_functions.ps1"
 
 $cv = "$ho/tik9.github.io.git"
 $cy = "$ho/cpython"
@@ -45,10 +47,9 @@ function c { get-content $args }
 
 function co { code $args }
 function chr { Start-Process chrome.exe $args }
-function com { wmic computersystem get model, name, manufacturer, systemtype }
-
+function cph { cp '/root/.config/powershell/Microsoft.PowerShell_profile.ps1' '/home/tk/.config/powershell' }
 function cu {
-	$url = 'http://192.168.178.36/cgit/doks.git/tree/arbeiten_haus.md'
+	$url = 'http://192.168.178.36/cgit/doks.git/tree/<foo>.md'
 	$url = $args
 	Invoke-WebRequest  -UseBasicParsing $url
 }
