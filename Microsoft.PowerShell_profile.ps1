@@ -1,26 +1,29 @@
 # https://gist.github.com/timsneath/19867b12eee7fd5af2ba
 
-Write-Output "$PSScriptRoot - $(hostname)"
+# Write-Output "$PSScriptRoot - $(hostname)"
 
 $hostname = $(hostname)
 
 $hw = '/home/tk'
 $ho = $hw
-$ph = "$ho/.config/powershell"
+$configpowershell = '.config/powershell'
+$i = 'ifconfig'
+$cu = '.config/Code/User'
 
 if ($hostname.contains('tik')) {
-	# $ho = $env:userprofile
-
+	$cu = 'appdata/roaming/code/user'
+	$ho = $env:userprofile
 	$wsl = '\\wsl$\debian'
 	$hw = "$wsl/$hw"
-	$ph = "$ho/Documents/WindowsPowerShell"
+	$configpowershell = 'Documents/WindowsPowerShell'
+	$i = 'ipconfig'
 }
+$cs = "$ho/$cu"
+$ph = "$ho/$configpowershell"
 
 $o = "$ho/.oh-my-zsh/custom"
 
-$be = "$ho/bewerbung"
-
-$cv = "$ho/tik9.github.io.git"
+$cv = "$ho/tik9.github.io"
 $cy = "$ho/cpython"
 $ga = "$ho/game"
 
@@ -28,6 +31,12 @@ $gt = "$ho/git"
 
 $rt = "$ho/rest-test"
 $ws = "$ho/workspace.code-workspace"
+
+# ips
+$root_ip = '192.168.178'
+$rasp_ip = "$root_ip.36"
+$termux_port = '-p8022'
+$termux_ip = 38
 
 # node
 function n { npm $args }
@@ -45,12 +54,12 @@ function a { displayswitch.exe /external } # 2 verwenden
 
 function c { get-content $args }
 
+function cc { $args | Set-Clipboard }
 function co { code $args }
 function chr { Start-Process chrome.exe $args }
-function cph { cp '/root/.config/powershell/Microsoft.PowerShell_profile.ps1' '/home/tk/.config/powershell' }
-function cu {
-	$url = 'http://192.168.178.36/cgit/doks.git/tree/<foo>.md'
-	$url = $args
+function cph { Copy-Item "/home/tk/$configpowershell/Microsoft.PowerShell_profile.ps1" "/root/$configpowershell" }
+function cur {
+	$url = "$rasp_ip/cgit/doks.git/tree/<foo>.md"
 	Invoke-WebRequest  -UseBasicParsing $url
 }
 
@@ -73,16 +82,12 @@ function Get-Size {
 function hif { Get-History | Format-List }
 function map_net { net use z: $wsl }
  
-function map { New-PSrive -Name 'y' -Root $lw -Persist -PSProvider "FileSystem" }
-
 function le { more $args }
 
+function m { $args | more }
 
 function pa { [System.Environment]::GetEnvironmentVariable("Path", "Machine") }
 
-function pat {
-	[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$args", "Machine")
-}
 function prid {
 	$prid = 35729
 	# $prid=$args
@@ -142,3 +147,5 @@ set-alias gr findstr
 . $cf
 
 Import-Module $PSScriptRoot/posh-git\src\posh-git.psd1
+
+"$PSCommandPath loaded"

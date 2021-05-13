@@ -1,16 +1,13 @@
-
-function ga { git add . }
 function gb { git branch }
+
 function gc { git commit -a -m $1 }
 function gcp { git commit -a -m $args }
-function gd { git diff }
-function gdc { git diff --cached }
+function ga { git add . }
 
-function gg { git log }
-
+function gic { git commit -am 'commit'}
 
 function gll { git pull }
-function glg { git log --stat }
+
 function glum { git pull upstream master }
 
 function gpu { git push }
@@ -24,23 +21,22 @@ function gstart {
     git add README.md
     git commit -m "first commit"
     git push -u origin master
-
 }
-
-function gru { git remote update }
 
 function grv { git remote -v }
-
-function gsq {
-    git rebase -i HEAD~5
-
-    # git reset --hard HEAD~2
-    # git merge --squash HEAD@{1}
-    # git commit
-}
 
 function gw {
     git add .
     git commit -m 'commit from tik'
     gpu
 }
+
+# log
+function glg { git log --stat }
+function glog { git log }
+function gg { git log -1 --date=format:"%Y/%m/%d" --format="%ad" }
+
+# diff
+
+function gd { git diff }
+function gdc { git diff --cached }

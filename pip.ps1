@@ -10,3 +10,5 @@ function pipu {
     pip freeze | ForEach-Object { $_.split('==')[0] } | ForEach-Object { pip install --upgrade $_ }
 
 }
+
+"$PSCommandPath loaded"
