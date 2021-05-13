@@ -1,27 +1,30 @@
 # https://gist.github.com/timsneath/19867b12eee7fd5af2ba
 # git log -1 --date=format:"%Y/%m/%d %T" --format="%ad"
 
-# $hostname = $(hostname)
+# Write-Output "$PSScriptRoot - $(hostname)"
+
+$hostname = $(hostname)
 
 $hw = '/home/tk'
 $ho = $hw
-$ph = "$ho/.config/powershell"
+$configpowershell = '.config/powershell'
+$i = 'ifconfig'
+$cu = '.config/Code/User'
 
 if ($hostname.contains('tik')) {
-	# $ho = $env:userprofile
-
+	$cu = 'appdata/roaming/code/user'
+	$ho = $env:userprofile
 	$wsl = '\\wsl$\debian'
 	$hw = "$wsl/$hw"
-	$ho='c:/users/user'
-	$ph = "$ho/Documents/WindowsPowerShell"
+	$configpowershell = 'Documents/WindowsPowerShell'
+	$i = 'ipconfig'
 }
+$cs = "$ho/$cu"
+$ph = "$ho/$configpowershell"
 
 $o = "$ho/.oh-my-zsh/custom"
 
-$be = "$ho/bewerbung"
-$cf = "$PSScriptRoot/common_functions.ps1"
-
-$cv = "$ho/tik9.github.io.git"
+$cv = "$ho/tik9.github.io"
 $cy = "$ho/cpython"
 
 $gt = "$ho/git"
@@ -30,8 +33,10 @@ $rt = "$ho/rest-test"
 $ws = "$ho/workspace.code-workspace"
 
 # ips
-$root_ip='192.168.178'
-$rasp_ip='root@$root_ip.36'
+$root_ip = '192.168.178'
+$rasp_ip = "$root_ip.36"
+$termux_port = '-p8022'
+$termux_ip = 38
 
 # node
 function n { npm $args }
@@ -49,12 +54,12 @@ function a { displayswitch.exe /external } # 2 verwenden
 
 function c { get-content $args }
 
+function cc { $args | Set-Clipboard }
 function co { code $args }
 function chr { Start-Process chrome.exe $args }
-function cph { cp '/root/.config/powershell/Microsoft.PowerShell_profile.ps1' '/home/tk/.config/powershell' }
-function cu {
-	$url = 'http://192.168.178.36/cgit/doks.git/tree/<foo>.md'
-	$url = $args
+function cph { Copy-Item "/home/tk/$configpowershell/Microsoft.PowerShell_profile.ps1" "/root/$configpowershell" }
+function cur {
+	$url = "$rasp_ip/cgit/doks.git/tree/<foo>.md"
 	Invoke-WebRequest  -UseBasicParsing $url
 }
 
@@ -80,7 +85,8 @@ function le { more $args }
 function l { ls }
 function ll { ls | more }
 
-function m {$args|more}
+function m { $args | more }
+
 function pa { [System.Environment]::GetEnvironmentVariable("Path", "Machine") }
 
 function prid {
@@ -144,5 +150,4 @@ set-alias p pwsh
 
 Import-Module $PSScriptRoot/posh-git\src\posh-git.psd1
 
-# Write-Output '12'
-$PSCommandPath
+"$PSCommandPath loaded"
