@@ -10,10 +10,6 @@ function nov { node -v}
 function ns { npm start}
 function ng { npm ls -g }
 
-# ls
-function l { ls}
-function ll { ls |more }
-
 function vse { echo $(code --list-extensions)|tr ' ' '\n' > extensions.txt}
 
 #set location

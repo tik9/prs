@@ -1,8 +1,7 @@
 # https://gist.github.com/timsneath/19867b12eee7fd5af2ba
+# git log -1 --date=format:"%Y/%m/%d %T" --format="%ad"
 
-Write-Output "$PSScriptRoot - $(hostname)"
-
-$hostname = $(hostname)
+# $hostname = $(hostname)
 
 $hw = '/home/tk'
 $ho = $hw
@@ -13,21 +12,26 @@ if ($hostname.contains('tik')) {
 
 	$wsl = '\\wsl$\debian'
 	$hw = "$wsl/$hw"
+	$ho='c:/users/user'
 	$ph = "$ho/Documents/WindowsPowerShell"
 }
 
 $o = "$ho/.oh-my-zsh/custom"
 
 $be = "$ho/bewerbung"
+$cf = "$PSScriptRoot/common_functions.ps1"
 
 $cv = "$ho/tik9.github.io.git"
 $cy = "$ho/cpython"
-$ga = "$ho/game"
 
 $gt = "$ho/git"
 
 $rt = "$ho/rest-test"
 $ws = "$ho/workspace.code-workspace"
+
+# ips
+$root_ip='192.168.178'
+$rasp_ip='root@$root_ip.36'
 
 # node
 function n { npm $args }
@@ -71,18 +75,14 @@ function Get-Size {
  "{0:n0}" -f ((Get-ChildItem -path $pth -recurse | measure-object -property length -sum).sum / 1mb) + " mb"
 }
 function hif { Get-History | Format-List }
-function map_net { net use z: $wsl }
  
-function map { New-PSrive -Name 'y' -Root $lw -Persist -PSProvider "FileSystem" }
-
 function le { more $args }
+function l { ls }
+function ll { ls | more }
 
-
+function m {$args|more}
 function pa { [System.Environment]::GetEnvironmentVariable("Path", "Machine") }
 
-function pat {
-	[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$args", "Machine")
-}
 function prid {
 	$prid = 35729
 	# $prid=$args
@@ -137,8 +137,12 @@ function w { wsl }
 function x { exit }
 
 set-alias gr findstr
+set-alias p pwsh
 
 . $PSScriptRoot\git.ps1
 . $cf
 
 Import-Module $PSScriptRoot/posh-git\src\posh-git.psd1
+
+# Write-Output '12'
+$PSCommandPath
