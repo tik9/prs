@@ -1,7 +1,28 @@
 # https://gist.github.com/timsneath/19867b12eee7fd5af2ba
-# git log -1 --date=format:"%Y/%m/%d %T" --format="%ad"
+<#
 
-# Write-Output "$PSScriptRoot - $(hostname)"
+c='less --quit-if-one-screen'
+sv='zsh --version'
+
+debian
+debian apt-copy , apt-history usage
+egrep -v '^#|^ *$' /etc/apt/sources.list /etc/apt/sources.list.d/*
+
+zshrc
+npm complete?
+
+git
+git config --System alias.ad 'add .' 
+git config --System --replace-all core.pager "less -F -X"
+
+user
+st='su tk'
+sg='su git'
+
+common
+function sv { ec $sv }
+
+#>
 
 $hostname = $(hostname)
 
@@ -30,6 +51,8 @@ $cy = "$ho/cpython"
 $gt = "$ho/git"
 
 $rt = "$ho/rest-test"
+$sv=($PSVersionTable|Select-Object -ExpandProperty  psversion)
+
 $ws = "$ho/workspace.code-workspace"
 
 # ips
@@ -50,17 +73,17 @@ function chi { choco install $args }
 function coi { choco list --local-only }
 function coo { choco outdated ; choco upgrade all }
 
-function a { displayswitch.exe /external } # 2 verwenden
+function ds { displayswitch.exe /external } # 2 verwenden
 
 function c { get-content $args }
+function cr { get-content $profile }
 
 function cc { $args | Set-Clipboard }
-function co { code $args }
 function chr { Start-Process chrome.exe $args }
-function cph { Copy-Item "/home/tk/$configpowershell/Microsoft.PowerShell_profile.ps1" "/root/$configpowershell" }
+function cph { Copy-Item "/home/tk/$configpowershell/Microsoft.PowerShell_profile.ps1" "/root/$configpowershell"; cr }
 function cur {
 	$url = "$rasp_ip/cgit/doks.git/tree/<foo>.md"
-	Invoke-WebRequest  -UseBasicParsing $url
+	Invoke-WebRequest $url
 }
 
 function d { (Get-Command $args).Definition }
@@ -104,13 +127,6 @@ function prompt {
 	return " "
 }
 
-function pwcf {
-	#hibern=2
-	#nothing=0
-	powercfg -SETACVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e 4f971e89-eebd-4455-a8de-9e59040e7347 5ca83367-6e45-459f-a27b-476b1d01c936 $args
-	powercfg -setactive 381b4222-f694-41f0-9685-ff5bb260df2e
-}
-
 function q {
 	$dat_te = 'http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
 	$a = Get-Date
@@ -139,14 +155,16 @@ function upd {
 }
 
 function vse { Write-Output $(code --list-extensions) | Out-File extensions.txt }
-function w { wsl }
-function x { exit }
+Set-Alias w wsl
+Set-Alias x  exit 
 
+set-alias a Get-Alias
+Set-Alias co code
 set-alias gr findstr
-set-alias p pwsh
+set-alias pi 'ping 8.8.8.8'
 
 . $PSScriptRoot\git.ps1
-. $cf
+. "$ph/common_functions.ps1"
 
 Import-Module $PSScriptRoot/posh-git\src\posh-git.psd1
 
