@@ -1,26 +1,46 @@
 # https://gist.github.com/timsneath/19867b12eee7fd5af2ba
 <#
 
-c='less --quit-if-one-screen'
-sv='zsh --version'
+iu='dhclient $eth; i'
+pk=pkill
+
+function add_zsh_plugin {
+echo "b=$0\na=${(s|custom/plugins/$1/|)b}\necho $a[2] loaded">> file.txt
+}
 
 debian
-debian apt-copy , apt-history usage
-egrep -v '^#|^ *$' /etc/apt/sources.list /etc/apt/sources.list.d/*
-
-zshrc
-npm complete?
+al=alu
 
 git
-git config --System alias.ad 'add .' 
-git config --System --replace-all core.pager "less -F -X"
+
+zshrc
+
 
 user
-st='su tk'
-sg='su git'
 
 common
-function sv { ec $sv }
+
+	ip=192.168.178.36
+	config_dir=.config
+	
+	 ssh git@$ip \
+	 '
+	gc=gitconfig
+	# gc=/etc/$gc
+	lx=lx
+	# lx=~/$config_dir/openbox
+	ws=ws
+	# ws=~/$config_dir/Code/Workspaces/1619293380488
+
+	for elem in $gc $lx $ws ; do
+	echo $elem
+ 	#  mkdir /gt/.git 
+	#  cd /gt/.git
+	#  echo ###### > description
+	#  git init --bare
+	 done
+	  '
+
 
 #>
 
