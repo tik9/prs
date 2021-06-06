@@ -1,55 +1,42 @@
 # https://gist.github.com/timsneath/19867b12eee7fd5af2ba
 <#
 
-iu='dhclient $eth; i'
-pk=pkill
+rename.sh copy
+alias dn='cat /etc/resolv.conf'
+pwsh alias kat. ändern
+fb=$ho/fritzbox
+alias fs="$fb/fritzBoxShell.sh"
+fbw=wlan_2g
+alias fbs="fs $fbw state"
 
-function add_zsh_plugin {
-echo "b=$0\na=${(s|custom/plugins/$1/|)b}\necho $a[2] loaded">> file.txt
-}
+alias dow
 
 debian
-al=alu
+al=alu |less
+rm ail, ap, apt_pref_compdef,allpkgs,mydeb,apt-copy
 
 git
+gi='git init'
+
 
 zshrc
 
-
-user
+vscode
+"terminal.integrated.shell.windows": "c:/powerShell/7/pwsh.exe"
+https://argonsys.com/microsoft-cloud/library/configure-visual-studio-code-to-run-powershell-for-windows-and-powershell-core-simultaneously
 
 common
-
-	ip=192.168.178.36
-	config_dir=.config
-	
-	 ssh git@$ip \
-	 '
-	gc=gitconfig
-	# gc=/etc/$gc
-	lx=lx
-	# lx=~/$config_dir/openbox
-	ws=ws
-	# ws=~/$config_dir/Code/Workspaces/1619293380488
-
-	for elem in $gc $lx $ws ; do
-	echo $elem
- 	#  mkdir /gt/.git 
-	#  cd /gt/.git
-	#  echo ###### > description
-	#  git init --bare
-	 done
-	  '
-
+#set location and other
+function fb { cd $fb }
 
 #>
+
 
 $hostname = $(hostname)
 
 $hw = '/home/tk'
 $ho = $hw
 $configpowershell = '.config/powershell'
-$i = 'ifconfig'
 $cu = '.config/Code/User'
 
 if ($hostname.contains('tik')) {
@@ -58,7 +45,6 @@ if ($hostname.contains('tik')) {
 	$wsl = '\\wsl$\debian'
 	$hw = "$wsl/$hw"
 	$configpowershell = 'Documents/WindowsPowerShell'
-	$i = 'ipconfig'
 }
 $cs = "$ho/$cu"
 $ph = "$ho/$configpowershell"
@@ -68,10 +54,18 @@ $o = "$ho/.oh-my-zsh/custom"
 $cv = "$ho/tik9.github.io"
 $cy = "$ho/cpython"
 
-$gt = "$ho/git"
+$gt="$ho/gman"
 
 $rt = "$ho/rest-test"
-$sv=($PSVersionTable|Select-Object -ExpandProperty  psversion)
+function psversion{
+if ($PSVersionTable == '7'){
+
+$sv=$PSVersionTable|Select-Object -ExpandProperty  psversion
+}
+else {
+$sv=$PSVersionTable
+}
+}
 
 $ws = "$ho/workspace.code-workspace"
 
@@ -106,7 +100,11 @@ function cur {
 	Invoke-WebRequest $url
 }
 
-function d { (Get-Command $args).Definition }
+function d { 
+	if ($args){
+
+	(Get-Command $args).Definition }
+}	
 function dela { Remove-Item alias:$args }
 function driv {	Get-PSDrive -PSProvider FileSystem | Select-Object name, @{n = "Root"; e = { if ($null -eq $_.DisplayRoot ) { $_.Root } else { $_.DisplayRoot } } } }
 
@@ -160,6 +158,11 @@ function run_adm { Start-Process "powershell" -Verb RunAs }
 
 function ser { Get-Service | Where-Object { $_.status -eq 'running' } | findstr $args }
 
+function setdns {
+$setdns=Get-NetAdapter  -Name "Ethernet 9" | Set-DnsClientServerAddress -ServerAddresses 192.168.178.1
+Get-DNSClientServerAddress
+
+}
 function spr { Get-Process $args | Stop-Process }
 
 function update {
@@ -175,13 +178,17 @@ function upd {
 }
 
 function vse { Write-Output $(code --list-extensions) | Out-File extensions.txt }
-Set-Alias w wsl
-Set-Alias x  exit 
+
 
 set-alias a Get-Alias
 Set-Alias co code
+set-alias dn 'echo exit | nslookup | findstr ":"'
 set-alias gr findstr
+set-alias i ipconfig
 set-alias pi 'ping 8.8.8.8'
+Set-Alias w wsl
+Set-Alias x  exit 
+
 
 . $PSScriptRoot\git.ps1
 . "$ph/common_functions.ps1"
