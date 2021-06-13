@@ -1,33 +1,27 @@
 # https://gist.github.com/timsneath/19867b12eee7fd5af2ba
 <#
+rename kopieren von ph nach o
 
-rename.sh copy
-alias dn='cat /etc/resolv.conf'
-pwsh alias kat. ändern
-fb=$ho/fritzbox
-alias fs="$fb/fritzBoxShell.sh"
-fbw=wlan_2g
-alias fbs="fs $fbw state"
+alias pks ='pkill ssh'
+fbw=2g
+alias fs=$fb/fritzBoxShell.sh
+workspace 1619293380488
+ws=$ho/workspace.code-workspace in win, in linux
+function dn {
+	cat /etc/resolv.conf
+}
 
-alias dow
 
 debian
-al=alu |less
-rm ail, ap, apt_pref_compdef,allpkgs,mydeb,apt-copy
 
 git
-gi='git init'
-
+gds='git diff --summary'
 
 zshrc
 
 vscode
-"terminal.integrated.shell.windows": "c:/powerShell/7/pwsh.exe"
-https://argonsys.com/microsoft-cloud/library/configure-visual-studio-code-to-run-powershell-for-windows-and-powershell-core-simultaneously
 
 common
-#set location and other
-function fb { cd $fb }
 
 #>
 
@@ -40,11 +34,11 @@ $configpowershell = '.config/powershell'
 $cu = '.config/Code/User'
 
 if ($hostname.contains('tik')) {
+	$configpowershell = 'Documents/WindowsPowerShell'
 	$cu = 'appdata/roaming/code/user'
 	$ho = $env:userprofile
 	$wsl = '\\wsl$\debian'
 	$hw = "$wsl/$hw"
-	$configpowershell = 'Documents/WindowsPowerShell'
 }
 $cs = "$ho/$cu"
 $ph = "$ho/$configpowershell"
