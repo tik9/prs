@@ -1,21 +1,16 @@
 # https://gist.github.com/timsneath/19867b12eee7fd5af2ba
+
+# $(Get-NetConnectionProfile).name
+
 <#
-rename kopieren von ph nach o
-
-alias pks ='pkill ssh'
-fbw=2g
-alias fs=$fb/fritzBoxShell.sh
-workspace 1619293380488
-ws=$ho/workspace.code-workspace in win, in linux
-function dn {
-	cat /etc/resolv.conf
-}
-
-
+rm fb=$ho/fritzbox
+function cc { echo `$@` |xclip -selection clipboard }
+function cl { echo $@ |xclip -selection clipboard }
+alias b=bash
 debian
 
 git
-gds='git diff --summary'
+function glum { git pull origin master }
 
 zshrc
 
@@ -29,16 +24,22 @@ common
 $hostname = $(hostname)
 
 $hw = '/home/tk'
+$config = '.config'
+$configpowershell = "$config/powershell"
+$cu = "$config/Code/User"
 $ho = $hw
-$configpowershell = '.config/powershell'
-$cu = '.config/Code/User'
+$user = $env:USER
+$ws = "$ho/$config/Code/Workspaces/1619293380488/workspace.json"
 
 if ($hostname.contains('tik')) {
 	$configpowershell = 'Documents/WindowsPowerShell'
 	$cu = 'appdata/roaming/code/user'
 	$ho = $env:userprofile
+	$user = $env:username
 	$wsl = '\\wsl$\debian'
 	$hw = "$wsl/$hw"
+	$ws = "$ho/workspace.code-workspace"
+
 }
 $cs = "$ho/$cu"
 $ph = "$ho/$configpowershell"
@@ -48,20 +49,18 @@ $o = "$ho/.oh-my-zsh/custom"
 $cv = "$ho/tik9.github.io"
 $cy = "$ho/cpython"
 
-$gt="$ho/gman"
+$gt = "$ho/gman"
 
-$rt = "$ho/rest-test"
-function psversion{
-if ($PSVersionTable == '7'){
+function psversion {
+	if ($PSVersionTable == '7') {
 
-$sv=$PSVersionTable|Select-Object -ExpandProperty  psversion
-}
-else {
-$sv=$PSVersionTable
-}
+		$sv = $PSVersionTable | Select-Object -ExpandProperty  psversion
+	}
+	else {
+		$sv = $PSVersionTable
+	}
 }
 
-$ws = "$ho/workspace.code-workspace"
 
 # ips
 $root_ip = '192.168.178'
@@ -81,34 +80,26 @@ function chi { choco install $args }
 function coi { choco list --local-only }
 function coo { choco outdated ; choco upgrade all }
 
-function ds { displayswitch.exe /external } # 2 verwenden
 
 function c { get-content $args }
-function cr { get-content $profile }
 
 function cc { $args | Set-Clipboard }
-function chr { Start-Process chrome.exe $args }
-function cph { Copy-Item "/home/tk/$configpowershell/Microsoft.PowerShell_profile.ps1" "/root/$configpowershell"; cr }
-function cur {
-	$url = "$rasp_ip/cgit/doks.git/tree/<foo>.md"
-	Invoke-WebRequest $url
-}
 
 function d { 
-	if ($args){
-
-	(Get-Command $args).Definition }
+	if ($args) {
+		(Get-Command $args).Definition 
+ }
 }	
 function dela { Remove-Item alias:$args }
-function driv {	Get-PSDrive -PSProvider FileSystem | Select-Object name, @{n = "Root"; e = { if ($null -eq $_.DisplayRoot ) { $_.Root } else { $_.DisplayRoot } } } }
 
+function dn2 { Write-Output exit | nslookup | findstr ":" }
 
-function e { . $profile }
+function dn1 {
+	Get-NetAdapter -Name "Ethernet 9" | Set-DnsClientServerAddress -ServerAddresses 192.168.178.1
+}
+function ds { displayswitch.exe /external } # 2 verwenden
+
 function ec { Write-Output $args }
-
-function fin {	Get-ChildItem c:/ -Filter $args[0] -Recurse | Select-Object -First 1 }
-
-function finstr { Get-ChildItem -Recurse | Select-String -Pattern $args | Select-Object -Unique Path }
 
 function Get-Size {
  param([string]$pth)
@@ -117,25 +108,14 @@ function Get-Size {
 function hif { Get-History | Format-List }
  
 function le { more $args }
-function l { ls }
-function ll { ls | more }
-
-function m { $args | more }
-
-function pa { [System.Environment]::GetEnvironmentVariable("Path", "Machine") }
-
-function prid {
-	$prid = 35729
-	# $prid=$args
-	Get-Process -Id (Get-NetTCPConnection -LocalPort $prid).OwningProcess | Stop-Process
-}
+function l { Get-ChildItem $args }
+function ll { Get-ChildItem $args | more }
 
 function pm { shutdown.exe /h }
 
 function prompt {
 	$gl = Get-Location
-	#$verbindung = $(Get-NetConnectionProfile).name
-	write-host "PS [$Env:username] $gl >" -NoNewline
+	write-host "PS [$user] $gl >" -NoNewline
 	return " "
 }
 
@@ -152,11 +132,6 @@ function run_adm { Start-Process "powershell" -Verb RunAs }
 
 function ser { Get-Service | Where-Object { $_.status -eq 'running' } | findstr $args }
 
-function setdns {
-$setdns=Get-NetAdapter  -Name "Ethernet 9" | Set-DnsClientServerAddress -ServerAddresses 192.168.178.1
-Get-DNSClientServerAddress
-
-}
 function spr { Get-Process $args | Stop-Process }
 
 function update {
@@ -176,7 +151,7 @@ function vse { Write-Output $(code --list-extensions) | Out-File extensions.txt 
 
 set-alias a Get-Alias
 Set-Alias co code
-set-alias dn 'echo exit | nslookup | findstr ":"'
+Set-Alias dns Get-DNSClientServerAddress
 set-alias gr findstr
 set-alias i ipconfig
 set-alias pi 'ping 8.8.8.8'
