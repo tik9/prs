@@ -3,20 +3,22 @@
 # $(Get-NetConnectionProfile).name
 
 <#
-rm fb=$ho/fritzbox
-function cc { echo `$@` |xclip -selection clipboard }
-function cl { echo $@ |xclip -selection clipboard }
-alias b=bash
+# if [[ $HOST == tik ]];then ;alias -s pdf=sumatrapdf.exe
+# else alias -s pdf=qpdfview;fi
+
 debian
 
 git
-function glum { git pull origin master }
+# function gdl { git diff $1 }
+# function gdw { git diff $args }
+
+# function psh { pip show $1 }
 
 zshrc
 
-vscode
-
 common
+
+# function psh { pip show $1 }
 
 #>
 
@@ -65,8 +67,7 @@ function psversion {
 # ips
 $root_ip = '192.168.178'
 $rasp_ip = "$root_ip.36"
-$termux_port = '-p8022'
-$termux_ip = 38
+$termux_ip = "$root_ip.38 -p8022"
 
 # node
 function n { npm $args }
@@ -155,7 +156,10 @@ Set-Alias dns Get-DNSClientServerAddress
 set-alias gr findstr
 set-alias i ipconfig
 set-alias pi 'ping 8.8.8.8'
+set-alias pic '[Environment]::GetFolderPath("Mypictures")'
 Set-Alias w wsl
+set-alias s start-process
+
 Set-Alias x  exit 
 
 
