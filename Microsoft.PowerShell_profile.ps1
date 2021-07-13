@@ -3,22 +3,32 @@
 # $(Get-NetConnectionProfile).name
 
 <#
-# if [[ $HOST == tik ]];then ;alias -s pdf=sumatrapdf.exe
-# else alias -s pdf=qpdfview;fi
+ip adressen oben raus
+fritzbox aliase raus
+ipf=$ip_ro.1
+function cu { cd $cu }
+if [[ $HOST == tik ]];then ;alias -s pdf=sumatrapdf.exe
+else alias -s pdf=qpdfview;fi
+alias -s mp3=mplayer
+alias -s 3gp=mplayer
+alias -s webm=mplayer
+rename.sh for f in $HOME/*.webm $HOME/*.mp3; do
+alias -g T='|tail'
+alias h='sudo pm-suspend'
 
 debian
+alias al='apt list --upgradable|less'
 
 git
-# function gdl { git diff $1 }
-# function gdw { git diff $args }
+function gdl { git diff $1 }
+function gdw { git diff $args }
+alias gcm='git checkout master'
 
 # function psh { pip show $1 }
 
 zshrc
 
 common
-
-# function psh { pip show $1 }
 
 #>
 
